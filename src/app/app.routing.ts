@@ -4,6 +4,7 @@ import {Routes, RouterModule} from '@angular/router';
 //Layouts
 import {FullLayoutComponent} from './layouts/full-layout.component';
 import {SimpleLayoutComponent}    from './layouts/simple-layout.component';
+import {CanActivateAuthGuard} from "./guards/can-activate-auth-guard";
 
 export const routes: Routes = [
     {
@@ -15,13 +16,18 @@ export const routes: Routes = [
         path: '',
         component: FullLayoutComponent,
         data: {
-            title: 'Home'
+            title: 'Home',
         },
+        canActivate: [CanActivateAuthGuard],
         children: [
             {
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
+            {
+                path: 'installation',
+                loadChildren: './installation/installation.module#InstallationModule'
+            }
         ]
     },
     {

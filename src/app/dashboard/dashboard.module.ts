@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {NgModule} from '@angular/core';
+import {ChartsModule} from 'ng2-charts/ng2-charts';
 
-import { DashboardComponent } from './dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import {DashboardComponent} from './dashboard.component';
+import {DashboardRoutingModule} from './dashboard-routing.module';
+import {InstallationListModule} from "../installation-list/installation-list.module";
 
 @NgModule({
-  imports: [
-    DashboardRoutingModule,
-    ChartsModule
-  ],
-  declarations: [ DashboardComponent ]
+    imports: [
+        DashboardRoutingModule,
+        ChartsModule,
+        InstallationListModule,
+    ],
+    declarations: [DashboardComponent]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

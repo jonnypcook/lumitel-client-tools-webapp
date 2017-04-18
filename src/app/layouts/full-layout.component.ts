@@ -1,25 +1,81 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Installation} from "../common/models/installation.model";
+import {Observable, Subscription} from "rxjs";
+import {InstallationService} from "../common/services/installation.service";
+import {Router, ActivatedRoute, NavigationEnd} from "@angular/router";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './full-layout.component.html'
+    selector: 'app-dashboard',
+    templateUrl: './full-layout.component.html',
+    providers: [InstallationService]
 })
-export class FullLayoutComponent implements OnInit {
+export class FullLayoutComponent implements OnInit, OnDestroy {
+    private routerSubscription: Subscription;
+    private installation: Observable<Installation>;
+    private installationId: number;
 
-  constructor() { }
+    private currentInstallation: Installation;
+    private currentInstallationId: number;
+    public currentInstallationLoading: boolean = false;
 
-  public disabled:boolean = false;
-  public status:{isopen:boolean} = {isopen: false};
+    public date: Date;
+    public disabled: boolean = false;
+    public status: {isopen: boolean} = {isopen: false};
 
-  public toggled(open:boolean):void {
-    console.log('Dropdown is now: ', open);
-  }
+    constructor(private installationService: InstallationService, private router: Router, private route: ActivatedRoute) {
+    }
 
-  public toggleDropdown($event:MouseEvent):void {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.status.isopen = !this.status.isopen;
-  }
+    public toggled(open: boolean): void {
+        console.log('Dropdown is now: ', open);
+    }
 
-  ngOnInit(): void {}
+    public toggleDropdown($event: MouseEvent): void {
+        $event.preventDefault();
+        $event.stopPropagation();
+        this.status.isopen = !this.status.isopen;
+    }
+
+    ngOnInit(): void {
+        this.date = new Date();
+        this.installation = this.installationService.installation;
+        this.installation.subscribe(params => {
+            // if (!!params && params.installation_id === this.currentInstallationId) {
+            //     this.currentInstallation = params;
+            //     this.currentInstallationLoading = true;
+            // } else {
+            //     this.currentInstallationLoading = false;
+            // }
+        });
+
+        this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+            let currentRoute = this.route.root,
+                installationId: number = null;
+
+            do {
+                let childrenRoutes = currentRoute.children;
+                currentRoute = null;
+                childrenRoutes.forEach(route => {
+                    if (route.outlet === 'primary') {
+                        route.params.subscribe(param => {
+                            if (!!param['iid']) {
+                                installationId = +param['iid'];
+                            }
+                        });
+                        currentRoute = route;
+                        // console.log(currentRoute.);
+                    }
+                })
+            } while (currentRoute);
+
+            this.installationId = installationId;
+        });
+
+
+    }
+
+    ngOnDestroy() {
+        if (!!this.routerSubscription) {
+            this.routerSubscription.unsubscribe();
+        }
+    }
 }
