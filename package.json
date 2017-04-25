@@ -13,7 +13,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-dist-test": "ng build && cp src/static/manifest.yml src/static/Staticfile dist",
+    "build-dist-dev": "ng build --env=dev && cp src/static/manifest.yml src/static/Staticfile dist",
+    "build-dist-prod": "ng build --env=prod && cp src/static/manifest.yml src/static/Staticfile dist"
   },
   "private": true,
   "dependencies": {
