@@ -1,6 +1,6 @@
 ///<reference path="../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {GaugeSegment, GaugeLabel} from 'ng2-kw-gauge';
+import {GaugeSegment, GaugeLabel} from 'ng-gauge';
 import {DeviceService, DeviceDataType} from '../common/services/device.service';
 import {Observable} from "rxjs/Observable";
 import {Device} from "../common/models/device.model";
