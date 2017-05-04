@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  api: 'https://lumitel-api-test.eu-gb.mybluemix.net/api/',
-  auth: 'https://lumitel-api-test.eu-gb.mybluemix.net/',
+  api: 'https://insight-api.eu-gb.mybluemix.net/api/',
+  auth: 'https://insight-api.eu-gb.mybluemix.net/',
   clientId: '8',
-  clientSecret: 'pjKk7f4WzSDnH8pzkBBIfIEZxCiLgb861lna2baP'
+  clientSecret: 'NYKOQqtTHBcOZGz1OPVQ5A0bSbQnxPPx3xqgJNKu'
 };
