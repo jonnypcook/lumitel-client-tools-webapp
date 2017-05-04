@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   api: 'https://insight-api.eu-gb.mybluemix.net/api/',
   auth: 'https://insight-api.eu-gb.mybluemix.net/',
   clientId: '8',
