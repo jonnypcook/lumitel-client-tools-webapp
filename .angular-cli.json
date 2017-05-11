@@ -17,7 +17,8 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "scss/style.scss"
+        "scss/style.scss",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
       "scripts": [
         "../node_modules/chart.js/dist/Chart.bundle.min.js",
@@ -25,6 +26,7 @@
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
+        "local": "environments/environment.ts",
         "dev": "environments/environment.dev.ts",
         "prod": "environments/environment.prod.ts"
       }
